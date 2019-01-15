@@ -1,11 +1,8 @@
+import ujson
+from os.path import join
 from random import shuffle
 
-import numpy as np
-import pandas
 import sentencepiece as spm
-import ujson
-from random import shuffle
-from os.path import join
 from nltk.tokenize import sent_tokenize
 
 
