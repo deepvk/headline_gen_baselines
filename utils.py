@@ -15,7 +15,7 @@ class DataLoader:
         )
         self.data_path = data_path
         data = []
-        with open(data_path + 'processed-ria.json', 'r') as file:
+        with open(join(data_path, 'processed-ria.json'), 'r') as file:
             for line in file:
                 data += [ujson.loads(line)]
 
