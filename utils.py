@@ -27,9 +27,12 @@ class DataLoader:
             temp = [self.sp.EncodeAsIds(val['title'])]  # , self.sp.EncodeAsIds(val["body"])]
             sents = iter(sent_tokenize(val["body"]))
             sent = None
-            while not sent:
-                sent = next(sents)
-                sent = sent.strip()
+            try:
+                while not sent:
+                    sent = next(sents)
+                    sent = sent.strip()
+            except StopIteration:
+                sent = ""
             temp.append(self.sp.EncodeAsIds(sent))
             data_processed.append(temp)
 
