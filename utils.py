@@ -24,7 +24,7 @@ class DataLoader:
 
         data_processed = []
         for val in data:
-            temp = [" ".join(self.sp.EncodeAsIds(val['title']))]  # , self.sp.EncodeAsIds(val["body"])]
+            temp = [" ".join(self.sp.EncodeAsPieces(val['title']))]  # , self.sp.EncodeAsIds(val["body"])]
             sents = iter(sent_tokenize(val["body"]))
             sent = None
             try:
@@ -33,7 +33,7 @@ class DataLoader:
                     sent = sent.strip()
             except StopIteration:
                 sent = ""
-            temp.append(" ".join(self.sp.EncodeAsIds(sent)))
+            temp.append(" ".join(self.sp.EncodeAsPieces(sent)))
             data_processed.append(temp)
 
         indices = list(range(len(data)))
