@@ -23,7 +23,7 @@ class DataLoader:
         self.sp.Load(join(data_path, "ria.model"))
 
         data_processed = []
-        for val in data_processed:
+        for val in data:
             temp = [self.sp.EncodeAsIds(val['title'])]  # , self.sp.EncodeAsIds(val["body"])]
             sents = iter(sent_tokenize(val["body"]))
             sent = None
@@ -31,12 +31,14 @@ class DataLoader:
                 sent = next(sents)
                 sent = sent.strip()
             temp.append(self.sp.EncodeAsIds(sent))
+            data_processed.append(temp)
 
         indices = list(range(len(data)))
         shuffle(indices)
 
-        data = [data[i] for i in indices]
+        data = [data_processed[i] for i in indices]
         self.data = {'test': data[:20000], "valid": data[20000:30000], "train": data[30000:]}
+        del data_processed
 
     def save(self):
         self.save_headlines("train")
