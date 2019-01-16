@@ -25,8 +25,14 @@ class DataLoader:
 
         data_processed = []
         for val in data:
-            temp = [" ".join(self.sp.EncodeAsPieces(val['title']))]  # , self.sp.EncodeAsIds(val["body"])]
-            sents = sent_tokenize(val["body"])
+            if name == "ria":
+                title = val['title']
+                body = val["body"]
+            else:
+                title = val[0]
+                body = val[1]
+            temp = [" ".join(self.sp.EncodeAsPieces(title))]  # , self.sp.EncodeAsIds(val["body"])]
+            sents = sent_tokenize(body)
             if len(sents):
                 sent = sents[0]
                 if len(sents) > 1 and name == "ria":
