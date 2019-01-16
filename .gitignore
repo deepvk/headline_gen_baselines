@@ -1,5 +1,6 @@
 data/*.json
 data/embed*
+data/*bpe
 venv/
 .idea/
 .DS_Store

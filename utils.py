@@ -7,13 +7,14 @@ from nltk.tokenize import sent_tokenize
 
 
 class DataLoader:
-    def __init__(self, data_path=""):
+    def __init__(self, data_path="", seed=42):
         assert isinstance(
             data_path, str
         ), "Invalid data_path type. Required {}, but {} found".format(
             str, type(data_path)
         )
         self.data_path = data_path
+        self.seed = seed
         data = []
         with open(join(data_path, 'processed-ria.json'), 'r') as file:
             for line in file:
@@ -53,12 +54,12 @@ class DataLoader:
         self.save_first_sents("test")
 
     def save_headlines(self, part):
-        with open(join(self.data_path, "{}_headlines.bpe".format(part)), "wt") as f:
+        with open(join(self.data_path, "{}_headlines_{}.bpe".format(part, self.seed)), "wt") as f:
             for val in self.data[part]:
                 f.write(val[0] + "\n")
 
     def save_first_sents(self, part):
-        with open(join(self.data_path, "{}_first_sents.bpe".format(part)), "wt") as f:
+        with open(join(self.data_path, "{}_first_sents_{}.bpe".format(part, self.seed)), "wt") as f:
             for val in self.data[part]:
                 f.write(val[1] + "\n")
 
@@ -66,3 +67,14 @@ class DataLoader:
     def load_json(path):
         with open(path, 'r') as f:
             return ujson.loads(f.read())
+
+
+def unbpe(text):
+    tokens = text.split()
+    words = []
+    for token in tokens:
+        if not token.startswith("_"):
+            words[-1] += token
+        else:
+            words.append(token)
+    return words
