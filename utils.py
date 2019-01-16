@@ -7,7 +7,7 @@ from nltk.tokenize import sent_tokenize
 
 
 class DataLoader:
-    def __init__(self, data_path="", seed=42):
+    def __init__(self, data_path="", seed=42, name="ria"):
         assert isinstance(
             data_path, str
         ), "Invalid data_path type. Required {}, but {} found".format(
@@ -16,12 +16,12 @@ class DataLoader:
         self.data_path = data_path
         self.seed = seed
         data = []
-        with open(join(data_path, 'processed-ria.json'), 'r') as file:
+        with open(join(data_path, 'processed-{}.json'.format(name)), 'r') as file:
             for line in file:
                 data += [ujson.loads(line)]
 
         self.sp = spm.SentencePieceProcessor()
-        self.sp.Load(join(data_path, "ria.model"))
+        self.sp.Load(join(data_path, "{}.model".format(name)))
 
         data_processed = []
         for val in data:
@@ -29,7 +29,7 @@ class DataLoader:
             sents = sent_tokenize(val["body"])
             if len(sents):
                 sent = sents[0]
-                if len(sents) > 1:
+                if len(sents) > 1 and name == "ria":
                     sent = sents[1]
             else:
                 sent = ""
