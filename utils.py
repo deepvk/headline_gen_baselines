@@ -26,14 +26,14 @@ class DataLoader:
         data_processed = []
         for val in data:
             temp = [" ".join(self.sp.EncodeAsPieces(val['title']))]  # , self.sp.EncodeAsIds(val["body"])]
-            sents = iter(sent_tokenize(val["body"]))
-            sent = None
-            try:
-                while not sent:
-                    sent = next(sents)
-                    sent = sent.strip()
-            except StopIteration:
+            sents = sent_tokenize(val["body"])
+            if len(sents):
+                sent = sents[0]
+                if len(sents) > 1:
+                    sent = sents[1]
+            else:
                 sent = ""
+
             temp.append(" ".join(self.sp.EncodeAsPieces(sent)))
             data_processed.append(temp)
 
