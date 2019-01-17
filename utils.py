@@ -79,7 +79,7 @@ def unbpe(text):
     tokens = text.split()
     words = []
     for token in tokens:
-        if not token.startswith("▁"):
+        if not token.startswith("▁") and words:
             words[-1] += token
         else:
             words.append(token)
