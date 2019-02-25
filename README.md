@@ -2,7 +2,7 @@
 
 Data preparation for first sentence and OpenNMT baselines. You need to place `processed-ria.json` into `data` folder. 
 We have excluded HTML tags from "Rossiya Segodnya" corpus to obtain `processed-ria.json`.
-Run `python main.py` to get data.
+Run `python main.py` to get data prepared, but you need to download corpus by yourself.
 
 To test first sentence baseline you need to run 
 ```bash
