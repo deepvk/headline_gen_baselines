@@ -4,7 +4,9 @@ Data preparation for first sentence and OpenNMT baselines. You need to place `pr
 We have excluded HTML tags from "Rossiya Segodnya" corpus.
 Run `python main.py` to get data.
 
-To test first sentence baseline you need to run `python get_rouge.py data/test_first_sents.bpe data/test_headlines.bpe`.
+To test first sentence baseline you need to run 
+```python
+python get_rouge.py data/test_first_sents.bpe data/test_headlines.bpe```
 
 To train OpenNMT baseline, just follow instructions from official [OpenNMT repository](https://github.com/OpenNMT/OpenNMT-py):
 ```python
